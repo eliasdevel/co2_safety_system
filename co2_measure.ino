@@ -75,7 +75,7 @@ void loop()
               Config();
               break;
             case 2:
-              monitor();
+             
               break;
         }
 
@@ -86,8 +86,9 @@ void loop()
     if(count >= 100){
       count = 99;
       lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("colocar leitura");
+      co2Rule();
+//      lcd.setCursor(0,0);
+//      lcd.print("colocar leitura");
     }
 
     if(btn_push != 'N'){
@@ -292,48 +293,16 @@ bool isDone(){
   return false;
 }
 
-void monitor(){
-
-  lcd.clear();
-  int index =0;
-
-   while(ReadKeypad()!= 'L'){
-     if(index > 4 || index < 0){
-       index = 0;
-     }
-     getTemperature();
-     lcd.setCursor(0,1);
-
-     lcd.print("R");
-     lcd.print(index+1);
-
-     lcd.print("T:");
-     lcd.print(readEepromTemperature(index));
-     lcd.write(byte(0));
-     lcd.print("C|R:");
-     lcd.print(readEepromTiming(index));
-     lcd.print("m");
-     if(ReadKeypad()== 'U'){
-       delay(100);
-       index ++;
-     }
-
-     if(ReadKeypad()== 'D'){
-       delay(100);
-       index --;
-     }
-
-   }
- }
 
 
 
-void getTemperature(){
-  sensors.requestTemperatures();
+
+void co2Rule(){
+
 
   lcd.setCursor(0, 0);
   lcd.write(byte(1));
-  lcd.print(sensors.getTempCByIndex(0));
+  lcd.print(1000);
   lcd.write(byte(0));
   lcd.print("C");
 }
