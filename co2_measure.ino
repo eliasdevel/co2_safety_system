@@ -1,12 +1,8 @@
-/*
- * Software for home brew beer at home using LCD shild, ds18b20 temperature sensor
- * Libs :
- * https://github.com/milesburton/Arduino-Temperature-Control-Library
- *
- */
+
 
 #include "LcdHelper.h"
 #include "Menu.h"
+#include "Reader.h"
 // #include <EEPROM.h>
 
 const long intervalBuzzerAlarm = 500;
@@ -18,8 +14,6 @@ int minutesAux = 0;
 byte eeprom_time_positions[4] = {1, 3, 5, 7};
 byte eeprom_temperature_positions[4] = {0, 2, 4, 6};
 
-
-
 void setup()
 {
 
@@ -30,12 +24,12 @@ void setup()
   //     EEPROM.write(i, 0);
   //   }
   // }
-
+  Serial.begin(9600);
   lcdSetup();
+  co2SensorSetup();
   mainMenuDisplay();
   delay(1000);
 }
-
 
 int count = 0;
 void loop()
@@ -66,7 +60,7 @@ void loop()
   {
     count = 99;
     lcd.clear();
-    co2Rule();
+    displayCo2((int)readCo2());
   }
 
   if (btnPush != 'N')
@@ -78,18 +72,9 @@ void loop()
     count++;
   }
   delay(10);
-
-} //--------------- End of loop() loop ---------------------
+}
+//--------------- End of loop() loop ---------------------
 void config()
 {
   insideMenu(1);
-}
-
-void co2Rule()
-{
-  lcd.setCursor(0, 0);
-  lcd.write(byte(1));
-  lcd.print(1000);
-  lcd.write(byte(0));
-  lcd.print("C");
 }

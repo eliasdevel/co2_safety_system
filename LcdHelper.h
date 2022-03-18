@@ -12,6 +12,7 @@ char readKeypad();
 extern int keypadValue;
 void waitBtnRelease();
 void mainMenuBtn();
+void displayCo2(int val);
 // int keypad_value_old = 0;
 // int buzzerState = LOW;
 // int currentRampa = 0;
