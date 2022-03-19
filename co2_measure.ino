@@ -4,6 +4,7 @@
 #include "Menu.h"
 #include "Reader.h"
 #include "IoControl.h"
+#include "EepromHelper.h"
 // #include <EEPROM.h>
 
 const long intervalBuzzerAlarm = 500;
@@ -76,8 +77,8 @@ void loop()
   }
   delay(200);
   MQ135.update();
-  //TODO get from EEPROM
-  ioLogic(ppm, 2000);
+  
+  ioLogic(ppm, loadMaxPPM());
 }
 //--------------- End of loop() loop ---------------------
 void config()

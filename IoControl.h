@@ -10,4 +10,4 @@
 void setupIoControl();
 void ioLogic(int currentPPM, int maxPPM);
 void setOutputs(byte mode);
-#endif;
+#endif
