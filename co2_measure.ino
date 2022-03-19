@@ -3,6 +3,7 @@
 #include "LcdHelper.h"
 #include "Menu.h"
 #include "Reader.h"
+#include "IoControl.h"
 // #include <EEPROM.h>
 
 const long intervalBuzzerAlarm = 500;
@@ -24,6 +25,7 @@ void setup()
   //     EEPROM.write(i, 0);
   //   }
   // }
+  setupIoControl();
   Serial.begin(9600);
   lcdSetup();
   co2SensorSetup();
@@ -34,6 +36,7 @@ void setup()
 int count = 0;
 void loop()
 {
+  int ppm = (int)readCo2();
   lcd.noBlink();
   btnPush = readKeypad();
 
@@ -60,7 +63,7 @@ void loop()
   {
     count = 19;
     lcd.clear();
-    displayCo2((int)readCo2());
+    displayCo2(ppm);
   }
 
   if (btnPush != 'N')
@@ -73,6 +76,8 @@ void loop()
   }
   delay(200);
   MQ135.update();
+  //TODO get from EEPROM
+  ioLogic(ppm, 2000);
 }
 //--------------- End of loop() loop ---------------------
 void config()
