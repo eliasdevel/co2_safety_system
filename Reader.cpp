@@ -4,9 +4,14 @@ MQUnifiedsensor MQ135(placa, Voltage_Resolution, ADC_Bit_Resolution, pin, type);
 
 float readCo2()
 {
+    
     MQ135.setA(110.47);
     MQ135.setB(-2.862); // Configurate the ecuation values to get CO2 concentration
-    return MQ135.readSensor();
+
+    float var =  MQ135.readSensor() +400;
+    Serial.println(var);
+    
+    return var;
 }
 
 void co2SensorSetup()
@@ -27,6 +32,7 @@ void co2SensorSetup()
         calcR0 += MQ135.calibrate(RatioMQ135CleanAir);
         Serial.print(".");
     }
+   
     MQ135.setR0(calcR0 / 10);
     Serial.println("  done!.");
 

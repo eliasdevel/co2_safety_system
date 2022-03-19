@@ -56,9 +56,9 @@ void loop()
     waitBtnRelease();
   }
 
-  if (count >= 100)
+  if (count >= 20)
   {
-    count = 99;
+    count = 19;
     lcd.clear();
     displayCo2((int)readCo2());
   }
@@ -71,7 +71,8 @@ void loop()
   {
     count++;
   }
-  delay(10);
+  delay(200);
+  MQ135.update();
 }
 //--------------- End of loop() loop ---------------------
 void config()

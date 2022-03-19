@@ -51,10 +51,11 @@ void waitBtnRelease()
 }
 
 void displayCo2(int val)
-{
+{ 
+    lcd.noBlink();
     lcd.setCursor(0, 0);
     // lcd.write(byte(1));
     lcd.print(val);
     // lcd.write(byte(0));
-    lcd.print("C");
+    lcd.print("PPM");
 }
