@@ -4,14 +4,33 @@ MQUnifiedsensor MQ135(placa, Voltage_Resolution, ADC_Bit_Resolution, pin, type);
 
 float readCo2()
 {
-    
-    MQ135.setA(110.47);
-    MQ135.setB(-2.862); // Configurate the ecuation values to get CO2 concentration
+    MQ135.update();
+    MQ135.setA(605.18);
+    MQ135.setB(-3.937);            // Configurate the ecuation values to get CO concentration
+    float CO = MQ135.readSensor(); // Sensor will read PPM concentration using the model and a and b values setted before or in the setup
 
-    float var =  MQ135.readSensor() +400;
-    Serial.println(var);
-    
-    return var;
+    MQ135.setA(77.255);
+    MQ135.setB(-3.18);                  // Configurate the ecuation values to get Alcohol concentration
+    float Alcohol = MQ135.readSensor(); // Sensor will read PPM concentration using the model and a and b values setted before or in the setup
+
+    MQ135.setA(110.47);
+    MQ135.setB(-2.862);             // Configurate the ecuation values to get CO2 concentration
+    float CO2 = MQ135.readSensor(); // Sensor will read PPM concentration using the model and a and b values setted before or in the setup
+
+    MQ135.setA(44.947);
+    MQ135.setB(-3.445);                 // Configurate the ecuation values to get Tolueno concentration
+    float Tolueno = MQ135.readSensor(); // Sensor will read PPM concentration using the model and a and b values setted before or in the setup
+
+    MQ135.setA(102.2);
+    MQ135.setB(-2.473);             // Configurate the ecuation values to get NH4 concentration
+    float NH4 = MQ135.readSensor(); // Sensor will read PPM concentration using the model and a and b values setted before or in the setup
+
+    MQ135.setA(34.668);
+    MQ135.setB(-3.369);                 // Configurate the ecuation values to get Acetona concentration
+    float Acetona = MQ135.readSensor(); //
+    Serial.println("co2:" + String(CO2, 2));
+
+    return CO2;
 }
 
 void co2SensorSetup()
@@ -32,7 +51,7 @@ void co2SensorSetup()
         calcR0 += MQ135.calibrate(RatioMQ135CleanAir);
         Serial.print(".");
     }
-   
+
     MQ135.setR0(calcR0 / 10);
     Serial.println("  done!.");
 

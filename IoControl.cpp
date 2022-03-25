@@ -22,10 +22,12 @@ void ioLogic(int currentPPM, int maxPPM)
 {
     if (currentPPM >= maxPPM)
     {
+        Serial.println("ios:hihg");
         setOutputs(HIGH);
     }
     else
     {
+        Serial.println("ios:low");
         setOutputs(LOW);
     }
 }

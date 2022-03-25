@@ -37,7 +37,7 @@ void setup()
 int count = 0;
 void loop()
 {
-  int ppm = (int)readCo2();
+  int ppm = (int) readCo2();
   lcd.noBlink();
   btnPush = readKeypad();
 
@@ -76,7 +76,7 @@ void loop()
     count++;
   }
   delay(200);
-  MQ135.update();
+
   
   ioLogic(ppm, loadMaxPPM());
 }
