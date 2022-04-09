@@ -34,10 +34,10 @@ void mainMenuDisplay()
   switch (mainMenuPage)
   {
   case 1:
-    lcd.print("Config");
+    lcd.print("Config Saida 1");
     break;
   case 2:
-    lcd.print("Monitor");
+    lcd.print("Config saida 2");
   }
 }
 
@@ -46,63 +46,35 @@ void insideMenu(int menuNumber)
 
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("R" + String(menuNumber) + ", Temp:");
+  lcd.print("Saida" + String(menuNumber));
 
   lcd.setCursor(0, 1);
-  lcd.print("* Tempo:");
+  lcd.print("Limite Aceitavel");
   lcd.setCursor(0, 1);
 
-  int temperature = 0;
+  int ppmSet = loadMaxPPM();
   int timing = 0;
   int idr1 = 0;
   while (readKeypad() != 'L')
   {
     lcd.blink();
 
-    if (idr1 == 0)
+    lcd.setCursor(7, 0);
+    if (readKeypad() == 'U')
     {
-      lcd.setCursor(10, 0);
-      if (readKeypad() == 'U')
-      {
-        delay(100);
-        temperature++;
-      }
-      if (readKeypad() == 'D')
-      {
-        delay(100);
-        temperature--;
-      }
-
-      lcd.print(temperature);
-      lcd.print("*C");
+      delay(10);
+      ppmSet++;
     }
-    if (idr1 == 1)
+    if (readKeypad() == 'D')
     {
-      if (readKeypad() == 'U')
-      {
-        delay(100);
-        timing++;
-      }
-      if (readKeypad() == 'D')
-      {
-        delay(100);
-        timing--;
-      }
-      lcd.setCursor(8, 1);
-
-      lcd.print(timing);
-      lcd.print("m");
-    }
-    if (readKeypad() == 'R')
-    {
-      delay(500);
-      idr1++;
+      delay(10);
+      ppmSet--;
     }
 
-    if (idr1 != 1 && idr1 != 0)
-      idr1 == 0;
+    lcd.print(ppmSet);
+    lcd.print("_PPM");
   }
-
-//   EEPROM.write(eeprom_temperature_positions[menuNumber - 1], temperature);
-//   EEPROM.write(eeprom_time_positions[menuNumber - 1], timing);
+  saveMaxPPM(ppmSet);
+  //   EEPROM.write(eeprom_temperature_positions[menuNumber - 1], temperature);
+  //   EEPROM.write(eeprom_time_positions[menuNumber - 1], timing);
 }

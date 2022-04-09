@@ -2,6 +2,7 @@
 #define MENU
 #include <Arduino.h>
 #include "LcdHelper.h"
+#include "EepromHelper.h"
 void mainMenuBtn();
 void mainMenuDisplay();
 void insideMenu(int menuNumber);

@@ -19,16 +19,10 @@ byte eeprom_temperature_positions[4] = {0, 2, 4, 6};
 void setup()
 {
 
-  // for (int i = 0; i <= 255; i++)
-  // {
-  //   if (EEPROM.read(i) == 255)
-  //   {
-  //     EEPROM.write(i, 0);
-  //   }
-  // }
   setupIoControl();
   Serial.begin(9600);
   lcdSetup();
+  eepromSetup();
   co2SensorSetup();
   mainMenuDisplay();
   delay(1000);
@@ -37,7 +31,7 @@ void setup()
 int count = 0;
 void loop()
 {
-  int ppm = (int) readCo2();
+  int ppm = (int)readCo2();
   lcd.noBlink();
   btnPush = readKeypad();
 
@@ -77,7 +71,6 @@ void loop()
   }
   delay(200);
 
-  
   ioLogic(ppm, loadMaxPPM());
 }
 //--------------- End of loop() loop ---------------------
