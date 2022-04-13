@@ -30,7 +30,7 @@ float readCo2()
     float Acetona = MQ135.readSensor(); //
     Serial.println("co2:" + String(CO2, 2));
 
-    return CO2;
+    return CO2 + 400;
 }
 
 void co2SensorSetup()
