@@ -6,7 +6,7 @@
 void mainMenuBtn();
 void mainMenuDisplay();
 void insideMenu(int menuNumber);
-extern char btnPush;
+extern volatile char btnPush;
 extern byte mainMenuPage;
 extern byte mainMenuTotal;
 extern byte mainMenuPageOld;

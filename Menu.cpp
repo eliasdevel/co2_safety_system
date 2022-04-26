@@ -2,7 +2,7 @@
 byte mainMenuPage = 1;
 byte mainMenuTotal = 2;
 byte mainMenuPageOld = 1;
-char btnPush;
+volatile char btnPush;
 
 void mainMenuBtn()
 {

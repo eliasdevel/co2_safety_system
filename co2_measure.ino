@@ -34,6 +34,14 @@ void setup()
 
 void loop()
 {
+  if (btnPush != 'N')
+  {
+    count = 0;
+  }
+}
+
+ISR(TIMER0_COMPA_vect)
+{ // timer0 interrupt 2kHz
 
   lcd.noBlink();
   btnPush = readKeypad();
@@ -57,23 +65,26 @@ void loop()
     waitBtnRelease();
   }
 
-  if (count >= 20)
+  if (count >= 8000 && btnPush == 'N')
   {
-    count = 19;
+    count = 7800;
     lcd.clear();
     displayCo2(ppm);
   }
 }
-ISR(TIMER0_COMPA_vect)
-{ // timer0 interrupt 2kHz
-}
 
 ISR(TIMER1_COMPA_vect)
-{ // timer1 interrupt 1Hz 
+{ // timer1 interrupt 1Hz
   // generates pulse wave of frequency 1Hz/2 = 0.5kHz (takes two cycles for full wave- toggle high then toggle low)
   ppm = (int)readCo2();
   ioLogic(ppm, loadMaxPPM());
-  if (btnPush != 'N')
+ 
+}
+
+ISR(TIMER2_COMPA_vect)
+{ // timer1 interrupt 8kHz
+  // generates pulse wave of frequency 8kHz/2 = 4kHz (takes two cycles for full wave- toggle high then toggle low)
+   if (btnPush != 'N')
   {
     count = 0;
   }
@@ -81,11 +92,6 @@ ISR(TIMER1_COMPA_vect)
   {
     count++;
   }
-}
-
-ISR(TIMER2_COMPA_vect)
-{ // timer1 interrupt 8kHz 
-  // generates pulse wave of frequency 8kHz/2 = 4kHz (takes two cycles for full wave- toggle high then toggle low)
 }
 
 //--------------- End of loop() loop ---------------------

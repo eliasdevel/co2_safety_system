@@ -4,16 +4,16 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 void lcdSetup()
 {
-    lcd.begin(16, 2); // Initialize a 2x16 type LCD
-    uint8_t circle[8] = {0x2, 0x5, 0x2, 0x0, 0x0, 0x0, 0x0};
-    uint8_t temp[8] = {0x4, 0xa, 0xa, 0xa, 0xe, 0xa, 0x4};
-    uint8_t clock[8] = {0x0, 0xe, 0x11, 0x15, 0x13, 0xe, 0x0};
-    lcd.createChar(0, circle);
-    lcd.createChar(1, temp);
-    lcd.createChar(2, clock);
+  lcd.begin(16, 2); // Initialize a 2x16 type LCD
+  uint8_t circle[8] = {0x2, 0x5, 0x2, 0x0, 0x0, 0x0, 0x0};
+  uint8_t temp[8] = {0x4, 0xa, 0xa, 0xa, 0xe, 0xa, 0x4};
+  uint8_t clock[8] = {0x0, 0xe, 0x11, 0x15, 0x13, 0xe, 0x0};
+  lcd.createChar(0, circle);
+  lcd.createChar(1, temp);
+  lcd.createChar(2, clock);
 }
 const int keypadPin = A0;
-int keypadValue =0;
+int keypadValue = 0;
 // keypad_pin = A0;
 
 char readKeypad()
@@ -42,7 +42,6 @@ char readKeypad()
     return 'N';
 }
 
-
 void waitBtnRelease()
 {
   while (analogRead(keypadPin) < 800)
@@ -51,11 +50,11 @@ void waitBtnRelease()
 }
 
 void displayCo2(int val)
-{ 
-    lcd.noBlink();
-    lcd.setCursor(0, 0);
-    // lcd.write(byte(1));
-    lcd.print(val);
-    // lcd.write(byte(0));
-    lcd.print("PPM");
+{
+  lcd.noBlink();
+  lcd.setCursor(0, 0);
+  // lcd.write(byte(1));
+  lcd.print(val);
+  // lcd.write(byte(0));
+  lcd.print("PPM");
 }
