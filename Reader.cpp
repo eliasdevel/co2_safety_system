@@ -16,7 +16,7 @@ float readCo2()
     MQ135.setA(110.47);
     MQ135.setB(-2.862);             // Configurate the ecuation values to get CO2 concentration
     float CO2 = MQ135.readSensor(); // Sensor will read PPM concentration using the model and a and b values setted before or in the setup
-
+    CO2 = (CO2 * 100) + 400;
     MQ135.setA(44.947);
     MQ135.setB(-3.445);                 // Configurate the ecuation values to get Tolueno concentration
     float Tolueno = MQ135.readSensor(); // Sensor will read PPM concentration using the model and a and b values setted before or in the setup
@@ -30,7 +30,7 @@ float readCo2()
     float Acetona = MQ135.readSensor(); //
     Serial.println("co2:" + String(CO2, 2));
 
-    return CO2 + 400;
+    return CO2;
 }
 
 void co2SensorSetup()
