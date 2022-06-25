@@ -1,5 +1,5 @@
 {
     "sketch": "co2_measure.ino",
     "board": "arduino:avr:uno",
-    "port": "COM4"
+    "port": "COM5"
 }

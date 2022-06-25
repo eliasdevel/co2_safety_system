@@ -19,13 +19,13 @@ byte eeprom_temperature_positions[4] = {0, 2, 4, 6};
 void setup()
 {
 
-  setupIoControl();
   Serial.begin(9600);
   lcdSetup();
   eepromSetup();
   co2SensorSetup();
   mainMenuDisplay();
   delay(1000);
+  setupIoControl();
 }
 
 int count = 0;
