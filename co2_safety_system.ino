@@ -28,6 +28,8 @@ void setup()
   setupIoControl();
 }
 
+int loopLogicTimer = 0;
+
 int count = 0;
 void loop()
 {
@@ -71,7 +73,14 @@ void loop()
   }
   delay(200);
 
-  ioLogic(ppm, loadMaxPPM());
+  //A cada 4 segundos vai verificar
+  if(loopLogicTimer >=20){
+    ioLogic(ppm, loadMaxPPM());
+    loopLogicTimer = 0;
+  }
+  
+
+  loopLogicTimer++;
 }
 //--------------- End of loop() loop ---------------------
 void config()
